@@ -18,6 +18,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 SceneLoader="*uid://cpvv423o565o3"
+Sets="*uid://7bjknupqlj6r"
+Rarity="*uid://cyh0enkmikleh"
+Cards="*uid://dg4wdmcnmberb"
 
 [input]
 

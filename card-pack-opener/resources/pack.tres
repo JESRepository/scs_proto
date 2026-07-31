@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="Pack" format=3 uid="uid://cixyyp5htaarn"]
+
+[ext_resource type="Script" uid="uid://om4jtpn3mpcl" path="res://scripts/pack.gd" id="1_pauw3"]
+
+[resource]
+script = ExtResource("1_pauw3")

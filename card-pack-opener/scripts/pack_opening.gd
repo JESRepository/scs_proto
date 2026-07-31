@@ -1,7 +1,5 @@
 extends Node3D
 
-@onready var pack = preload("uid://boddd6sflubsw")
-
 var packs : Array[Pack]
 
 func _ready() -> void:
@@ -9,6 +7,8 @@ func _ready() -> void:
 
 
 func _on_pack_opening_menu_open_pack_pressed() -> void:
-	var new_pack = pack.instantiate()
-	add_child(new_pack)
+	var new_pack : Pack = load("uid://cixyyp5htaarn").duplicate()
+	new_pack.set_card_set(Sets.set_name.SET1)
+	new_pack.fill_pack()
+	new_pack.open_pack()
 	packs.append(new_pack)
