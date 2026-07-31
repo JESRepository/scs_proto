@@ -12,3 +12,7 @@ func _on_pack_opening_menu_open_pack_pressed() -> void:
 	new_pack.fill_pack()
 	new_pack.open_pack()
 	packs.append(new_pack)
+
+
+func _on_pack_opening_menu_exit_pressed() -> void:
+	SceneLoader.load_scene("uid://ciwvjo5q0h5cj")
