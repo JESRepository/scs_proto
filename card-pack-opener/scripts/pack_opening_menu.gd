@@ -1,3 +1,4 @@
+class_name PackOpeningMenu
 extends Control
 
 @onready var open_pack_button : Button = $BoxContainer/OpenPackButton
@@ -12,3 +13,6 @@ func _on_open_pack_button_pressed() -> void:
 
 func _on_exit_button_pressed() -> void:
 	exit_pressed.emit()
+
+func show_open_pack_button() -> void:
+	open_pack_button.visible = true

@@ -22,6 +22,10 @@ Sets="*uid://7bjknupqlj6r"
 Rarity="*uid://cyh0enkmikleh"
 Cards="*uid://dg4wdmcnmberb"
 
+[editor]
+
+movie_writer/fps=30
+
 [input]
 
 move_left={

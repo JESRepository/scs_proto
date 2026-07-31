@@ -41,6 +41,7 @@ func _create_card(card_rarity):
 			new_card = card_set.get_random_card(Rarity.rarity.ULTRA)
 		Rarity.rarity.SECRET:
 			new_card = card_set.get_random_card(Rarity.rarity.SECRET)
+	new_card.rarity = card_rarity
 	return new_card
 
 func open_pack() -> void:

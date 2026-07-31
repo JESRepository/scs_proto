@@ -1,10 +1,12 @@
 extends Node3D
 
-@onready var pack_mesh = $PackMesh
+@onready var pack_mesh : PackMesh = $PackMesh
 @onready var card_mesh = preload("uid://d4gyuufxkvyef")
-@onready var card_anchor = $CardAnchor
+@onready var card_anchor : Node3D = $CardAnchor
+@onready var pack_opening_menu : PackOpeningMenu = $PackOpeningMenu
 
 var packs : Array[Pack]
+var card_meshes : Array[CardMesh]
 
 const CARD_SPAWN_TIMER: float = 0.1
 const CARD_SPAWN_SPACING: float = 0.02
@@ -33,12 +35,36 @@ func _on_pack_mesh_pack_opened() -> void:
 	spawn_cards()
 
 func spawn_cards() -> void:
+	var curr_pack = packs.back()
 	var z_offset : float = 0.0
-	for cards in packs.back().pack_cards:
-		var new_card = card_mesh.instantiate()
-		add_child(new_card)
-		new_card.position.x = card_anchor.position.x + z_offset
-		new_card.position.y = card_anchor.position.y 
-		new_card.position.z = card_anchor.position.z - z_offset
+	var current_index : int = 0
+	for cards in curr_pack.pack_cards:
+		var new_card : CardMesh = card_mesh.instantiate()
+		new_card.material_override = StandardMaterial3D.new()
+		new_card.set_rarity(curr_pack.pack_cards[current_index].rarity)
+		card_anchor.add_child(new_card)
+		card_meshes.append(new_card)
+		if not new_card.is_connected("card_gone", _on_card_gone):
+			new_card.connect("card_gone", _on_card_gone)
+		new_card.pack_index = current_index
+		new_card.position.x += z_offset
+		new_card.position.z -= z_offset
 		z_offset += CARD_SPAWN_SPACING
 		await get_tree().create_timer(CARD_SPAWN_TIMER).timeout
+		current_index += 1
+
+func _on_card_gone(index: int) -> void:
+	var curr_card = card_meshes[index]
+	if index != packs.back().pack_cards.size() - 1:
+		var move_index = index
+		for n in range(index, card_meshes.size()-1):
+			var target = card_meshes[move_index]
+			var next_card = card_meshes[move_index + 1]
+			var tween = get_tree().create_tween()
+			tween.tween_property(next_card, "position", target.position, 0.1)
+			move_index += 1
+	else:
+		for card in card_meshes:
+			card.queue_free()
+		card_meshes.clear()
+		pack_opening_menu.show_open_pack_button()

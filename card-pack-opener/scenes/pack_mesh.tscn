@@ -21,7 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_lv5dx"]
 resource_name = "pack_open"
-length = 1.4
+length = 1.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -29,7 +29,7 @@ tracks/0/path = NodePath("PackMesh:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.53333336, 1, 1.1333333, 1.2333333, 1.4),
+"times": PackedFloat32Array(0, 0.53333336, 0.6333333, 0.76666665, 0.8666667, 1.0333333),
 "transitions": PackedFloat32Array(0.20306318, 0.4829683, 1, 0.63728017, 0.18301074, 1),
 "update": 0,
 "values": [Vector3(0.19999999, 0.3, 0.019999992), Vector3(0.25, 0.375, 0.025), Vector3(0.25, 0.375, 0.025), Vector3(0.25, 0.375, 0.025), Vector3(0.315, 0.473, 0.032), Vector3(0, 0, 0)]
