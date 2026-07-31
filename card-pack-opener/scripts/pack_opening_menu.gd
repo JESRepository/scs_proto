@@ -6,7 +6,7 @@ signal open_pack_pressed
 signal exit_pressed
 
 func _on_open_pack_button_pressed() -> void:
-	#open_pack_button.disabled = true
+	open_pack_button.visible = false
 	open_pack_pressed.emit()
 
 

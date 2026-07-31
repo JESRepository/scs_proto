@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://d4gyuufxkvyef"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_t4n73"]
+
+[sub_resource type="Animation" id="Animation_t4n73"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.21000001, 0.39999998, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8uaap"]
+resource_name = "pop_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.53),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.32, 0.61, 1.524), Vector3(0.21000001, 0.39999998, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w8i45"]
+_data = {
+&"RESET": SubResource("Animation_t4n73"),
+&"pop_in": SubResource("Animation_8uaap")
+}
+
+[node name="CardMesh" type="MeshInstance3D" unique_id=1990464157]
+transform = Transform3D(0.21000001, 0, 0, 0, 0.39999998, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("QuadMesh_t4n73")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=591633521]
+libraries/ = SubResource("AnimationLibrary_w8i45")
+autoplay = &"pop_in"

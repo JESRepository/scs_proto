@@ -49,6 +49,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="ProtoController" parent="Node3D" unique_id=576208379 instance=ExtResource("2_sugp2")]
+transform = Transform3D(-0.50000006, 0, 0.8660254, 0, 1, 0, -0.8660254, 0, -0.50000006, 0, 0, 0)
 
 [node name="Control" type="Control" parent="Node3D" unique_id=1152566308]
 layout_mode = 3

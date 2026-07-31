@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bc31isgi5my4t"]
+
+[ext_resource type="Script" uid="uid://cwn87uhihfqtk" path="res://scripts/pack_mesh.gd" id="1_r3j8k"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fq34b"]
+
+[sub_resource type="Animation" id="Animation_gmfsr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PackMesh:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.19999999, 0.3, 0.019999992)]
+}
+
+[sub_resource type="Animation" id="Animation_lv5dx"]
+resource_name = "pack_open"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PackMesh:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.53333336, 1, 1.1333333, 1.2333333, 1.4),
+"transitions": PackedFloat32Array(0.20306318, 0.4829683, 1, 0.63728017, 0.18301074, 1),
+"update": 0,
+"values": [Vector3(0.19999999, 0.3, 0.019999992), Vector3(0.25, 0.375, 0.025), Vector3(0.25, 0.375, 0.025), Vector3(0.25, 0.375, 0.025), Vector3(0.315, 0.473, 0.032), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1m7jr"]
+_data = {
+&"RESET": SubResource("Animation_gmfsr"),
+&"pack_open": SubResource("Animation_lv5dx")
+}
+
+[node name="PackMesh" type="MeshInstance3D" unique_id=1711318541]
+transform = Transform3D(0.19999999, 0, 0, 0, 0.3, 0, 0, 0, 0.019999992, 0, 0, 0)
+mesh = SubResource("BoxMesh_fq34b")
+script = ExtResource("1_r3j8k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1342131176]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_1m7jr")
+autoplay = &"RESET"
