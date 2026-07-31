@@ -70,7 +70,7 @@ theme_override_font_sizes/font_size = 64
 text = " X "
 
 [node name="PackMesh" parent="." unique_id=1711318541 instance=ExtResource("3_gmfsr")]
-transform = Transform3D(0.19999999, 0, 0, 0, 0.3, 0, 0, 0, 0.019999992, 0, 0, 1.165)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.125)
 
 [node name="CardAnchor" type="Node3D" parent="." unique_id=1732574923]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1725408)
