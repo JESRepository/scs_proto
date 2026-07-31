@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://chqqsspk6xh17"]
+
+[ext_resource type="Script" uid="uid://cic3k1d3bcks4" path="res://scripts/physical_button_interaction.gd" id="1_37dvb"]
+
+[node name="PhysicalButtonInteraction" type="Node" unique_id=196487795]
+script = ExtResource("1_37dvb")

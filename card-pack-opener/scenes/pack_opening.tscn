@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://biurtdes2n8ni"]
+
+[ext_resource type="Script" uid="uid://odxcftqkqf32" path="res://scripts/pack_opening.gd" id="1_dd4yc"]
+[ext_resource type="Script" uid="uid://cgnqosesky480" path="res://scripts/pack_opening_menu.gd" id="2_fq34b"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2rhi8"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_dd4yc"]
+sky_material = SubResource("ProceduralSkyMaterial_2rhi8")
+
+[sub_resource type="Environment" id="Environment_fq34b"]
+background_mode = 2
+sky = SubResource("Sky_dd4yc")
+tonemap_mode = 2
+
+[node name="PackOpening" type="Node3D" unique_id=366999047]
+script = ExtResource("1_dd4yc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=455926546]
+environment = SubResource("Environment_fq34b")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=580545757]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1167918142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.49)
+
+[node name="PackOpeningMenu" type="Control" parent="." unique_id=359510590]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_fq34b")
+
+[node name="BoxContainer" type="BoxContainer" parent="PackOpeningMenu" unique_id=1219542049]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.5
+offset_right = 45.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="OpenPackButton" type="Button" parent="PackOpeningMenu/BoxContainer" unique_id=512050064]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 64
+text = "Open Pack"
+
+[connection signal="open_pack_pressed" from="PackOpeningMenu" to="." method="_on_pack_opening_menu_open_pack_pressed"]
+[connection signal="pressed" from="PackOpeningMenu/BoxContainer/OpenPackButton" to="PackOpeningMenu" method="_on_open_pack_button_pressed"]
