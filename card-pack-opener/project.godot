@@ -26,6 +26,11 @@ Cards="*uid://dg4wdmcnmberb"
 
 movie_writer/fps=30
 
+[filesystem]
+
+import/blender/enabled.android=true
+import/blender/enabled.web=true
+
 [input]
 
 move_left={
