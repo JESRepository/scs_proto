@@ -8,6 +8,9 @@ var rares : Array[Card]
 var ultras : Array[Card]
 var secrets : Array[Card]
 
+var pack_texture : Resource
+var pack_texture_path : String
+
 func get_random_card(rarity: Rarity.rarity = Rarity.rarity.NONE):
 	var selected_card : Card
 	match rarity:
@@ -24,14 +27,15 @@ func get_random_card(rarity: Rarity.rarity = Rarity.rarity.NONE):
 	selected_card = selected_card.duplicate(true)
 	return selected_card
 
-
-func _safe_set_cards() -> void:
-	if not Cards.is_node_ready():
-		await Cards.ready
-	_set_cards()
-
 func _set_cards() -> void:
 	pass
+
+func _set_pack_texture_path():
+	pass
+
+func set_pack_texture():
+	_set_pack_texture_path()
+	pack_texture = load(pack_texture_path)
 
 func get_all_card_names():
 	if all_cards.size() == 0 or all_cards == null:

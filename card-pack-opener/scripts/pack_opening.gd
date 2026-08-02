@@ -1,8 +1,11 @@
 extends Node3D
 
-@onready var pack_mesh : PackMesh = $PackMesh
+
 @onready var card_anchor : Node3D = $CardAnchor
 @onready var pack_opening_menu : PackOpeningMenu = $PackOpeningMenu
+
+var pack_mesh_template = preload("uid://bc31isgi5my4t")
+var pack_mesh : PackMesh
 
 var packs : Array[Pack]
 var card_meshes : Array[CardMesh]
@@ -12,6 +15,7 @@ const CARD_SPAWN_SPACING: float = 0.02
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	create_pack_mesh()
 
 
 func _on_pack_opening_menu_open_pack_pressed() -> void:
@@ -25,10 +29,8 @@ func _on_pack_opening_menu_open_pack_pressed() -> void:
 func _on_pack_opening_menu_exit_pressed() -> void:
 	SceneLoader.load_scene("uid://ciwvjo5q0h5cj")
 
-
 func pack_opening_sequence() -> void:
 	pack_mesh.open_pack()
-
 
 func _on_pack_mesh_pack_opened() -> void:
 	spawn_cards()
@@ -52,6 +54,17 @@ func spawn_cards() -> void:
 		await get_tree().create_timer(CARD_SPAWN_TIMER).timeout
 		current_index += 1
 
+func create_pack_mesh() -> void:
+	pack_mesh = pack_mesh_template.instantiate()
+	
+	if not pack_mesh.pack_opened.is_connected(_on_pack_mesh_pack_opened):
+		pack_mesh.pack_opened.connect(_on_pack_mesh_pack_opened)
+	
+	var new_material = StandardMaterial3D.new()
+	new_material.albedo_texture = Sets.sets[Sets.set_name.SET1].pack_texture
+	pack_mesh.material_override = new_material
+	card_anchor.add_child(pack_mesh)
+
 func _on_card_gone(index: int) -> void:
 	var curr_card = card_meshes[index]
 	if index != packs.back().pack_cards.size() - 1:
@@ -67,3 +80,4 @@ func _on_card_gone(index: int) -> void:
 			card.queue_free()
 		card_meshes.clear()
 		pack_opening_menu.show_open_pack_button()
+		create_pack_mesh()

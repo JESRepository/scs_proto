@@ -12,3 +12,6 @@ func _set_cards() -> void:
 	secrets = [
 		add_by_index(41)
 	]
+
+func _set_pack_texture_path() -> void:
+	pack_texture_path = "uid://7l6gwwxr5jwa"

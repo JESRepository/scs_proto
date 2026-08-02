@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://odxcftqkqf32" path="res://scripts/pack_opening.gd" id="1_dd4yc"]
 [ext_resource type="Script" uid="uid://cgnqosesky480" path="res://scripts/pack_opening_menu.gd" id="2_fq34b"]
-[ext_resource type="PackedScene" uid="uid://bc31isgi5my4t" path="res://scenes/pack_mesh.tscn" id="3_gmfsr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2rhi8"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -69,14 +68,10 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 64
 text = " X "
 
-[node name="PackMesh" parent="." unique_id=1711318541 instance=ExtResource("3_gmfsr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.125)
-
 [node name="CardAnchor" type="Node3D" parent="." unique_id=1732574923]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1725408)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1125408)
 
 [connection signal="exit_pressed" from="PackOpeningMenu" to="." method="_on_pack_opening_menu_exit_pressed"]
 [connection signal="open_pack_pressed" from="PackOpeningMenu" to="." method="_on_pack_opening_menu_open_pack_pressed"]
 [connection signal="pressed" from="PackOpeningMenu/BoxContainer/OpenPackButton" to="PackOpeningMenu" method="_on_open_pack_button_pressed"]
 [connection signal="pressed" from="PackOpeningMenu/ExitButton" to="PackOpeningMenu" method="_on_exit_button_pressed"]
-[connection signal="pack_opened" from="PackMesh" to="." method="_on_pack_mesh_pack_opened"]

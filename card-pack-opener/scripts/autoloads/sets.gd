@@ -11,6 +11,7 @@ enum set_name {
 func make_set(new_set_UID : String) -> CardSet:
 	if not Cards.is_node_ready():
 		await Cards.ready
-	var new_set : CardSet = load(new_set_UID).duplicate()
-	new_set._safe_set_cards()
+	var new_set : CardSet = load(new_set_UID)
+	new_set._set_cards()
+	new_set.set_pack_texture()
 	return new_set
