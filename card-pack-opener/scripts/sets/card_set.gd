@@ -41,4 +41,30 @@ func get_all_card_names():
 		for n in all_cards:
 			names.append(n.card_name)
 		return names
-		
+
+func add_card(name: String):
+	var new_card = Cards.cards.get(name)
+	if new_card == null:
+		push_error("failed to add card " + str(name) + " to set")
+	else:
+		return new_card
+
+func add_by_index(index):
+	var new_card = Cards.get_by_index(index)
+	return new_card
+
+func add_range(start_index: int, end_index: int) -> Array[Card]:
+	var new_cards : Array[Card] = []
+	for n in range(start_index,end_index):
+		var curr_card : Card
+		curr_card = Cards.get_by_index(n)
+		if curr_card == null:
+			push_error("card at index " + str(n) + " was not able to be added")
+		else:
+			new_cards.append(curr_card)
+	return new_cards
+
+func add_all() -> Array[Card]:
+	var new_cards : Array[Card] = []
+	new_cards = add_range(1, Cards.cards.size())
+	return new_cards

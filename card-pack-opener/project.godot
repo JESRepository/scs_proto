@@ -22,6 +22,8 @@ Sets="*uid://7bjknupqlj6r"
 Rarity="*uid://cyh0enkmikleh"
 Cards="*uid://dg4wdmcnmberb"
 Flags="*uid://5nirtiktkxtj"
+CardSpawner="*uid://d11pjbvcee23n"
+JsonLoader="*uid://i7er61eaqd3h"
 
 [editor]
 

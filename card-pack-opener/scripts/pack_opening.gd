@@ -1,7 +1,6 @@
 extends Node3D
 
 @onready var pack_mesh : PackMesh = $PackMesh
-@onready var card_mesh = preload("uid://d4gyuufxkvyef")
 @onready var card_anchor : Node3D = $CardAnchor
 @onready var pack_opening_menu : PackOpeningMenu = $PackOpeningMenu
 
@@ -39,13 +38,13 @@ func spawn_cards() -> void:
 	var z_offset : float = 0.0
 	var current_index : int = 0
 	for cards in curr_pack.pack_cards:
-		var new_card : CardMesh = card_mesh.instantiate()
-		new_card.material_override = StandardMaterial3D.new()
-		new_card.set_rarity(curr_pack.pack_cards[current_index].rarity)
+		var new_card  = CardSpawner.spawn_card_mesh(curr_pack.pack_cards[current_index])
 		card_anchor.add_child(new_card)
 		card_meshes.append(new_card)
+		
 		if not new_card.is_connected("card_gone", _on_card_gone):
 			new_card.connect("card_gone", _on_card_gone)
+		
 		new_card.pack_index = current_index
 		new_card.position.x += z_offset
 		new_card.position.z -= z_offset

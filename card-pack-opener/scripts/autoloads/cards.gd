@@ -1,20 +1,20 @@
 extends Node
 
-@onready var card = preload("uid://bpbhkqigsrubv")
+@onready var json_data = JsonLoader.load_json("res://data/csvjson.json")
+@onready var cards : Dictionary[String, Card] = import_cards()
 
-@onready var cards : Dictionary[String, Card] = {
-	"Card1": make_card("Card1"),
-	"Card2": make_card("Card2"),
-	"Card3": make_card("Card3"),
-	"Card4": make_card("Card4"),
-	"Card5": make_card("Card5"),
-	"Card6": make_card("Card6"),
-	"Card7": make_card("Card7"),
-	"Card8": make_card("Card8"),
-	"Card9": make_card("Card9"),
-}
+func import_cards() -> Dictionary[String, Card]:
+	var new_cards : Dictionary[String, Card]
+	for n in json_data:
+		var curr_card = Card.new()
+		curr_card.card_name = n.get("Name")
+		curr_card.texture = n.get("Texture")
+		curr_card.index = n.get("Index")
+		new_cards.set(curr_card.card_name, curr_card)
+	return new_cards
 
-func make_card(new_name) -> Card:
-	var new_card = card.duplicate()
-	new_card.setup(new_name)
-	return new_card
+func get_by_index(index: int):
+	var all_keys : Array[Card] = cards.values()
+	for curr_card in all_keys:
+		if curr_card.index == index:
+			return curr_card
