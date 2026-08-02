@@ -41,7 +41,6 @@ _data = {
 }
 
 [node name="PackMesh" type="MeshInstance3D" unique_id=1711318541]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 mesh = ExtResource("1_1m7jr")
 script = ExtResource("1_r3j8k")
 
