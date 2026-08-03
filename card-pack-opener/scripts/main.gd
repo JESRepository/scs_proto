@@ -9,8 +9,8 @@ var player : ProtoController
 
 func _ready() -> void:
 	curr_scene = Menus.get_scene(Menus.menu_name.MAIN).instantiate()
-	connect_network()
 	connect_multiplayer_spawner()
+	connect_network()
 	add_child(curr_scene)
 	connect_menu(curr_scene)
 	connect_menu_manager()
@@ -36,10 +36,14 @@ func connect_envi(envi: CustomEnvironment) -> void:
 			pass
 
 func _on_host_pressed() -> void:
+	switch_to_hub()
+	Networking.host_lobby()
+
+func switch_to_hub() -> void:
 	var new_scene = Environments.get_envi(Environments.envi_name.HUB).instantiate()
 	switch_scene(new_scene)
 	menu_manager.add_submenu(Menus.menu_name.SPAWN_PACK)
-	Networking.host_lobby()
+	print("we in the hub")
 
 func switch_scene(new_scene: Node) -> void:
 	if new_scene is CustomEnvironment:
@@ -50,6 +54,7 @@ func switch_scene(new_scene: Node) -> void:
 
 func connect_network() -> void:
 	Networking.host_created.connect(_on_host_created)
+	Networking.joining_lobby.connect(_on_join_lobby)
 
 func connect_player() -> void:
 	if not player.player_interaction.is_connected(_on_proto_controller_player_interaction):
@@ -60,8 +65,10 @@ func connect_menu_manager() -> void:
 		menu_manager.main_request.connect(_on_main_request)
 
 func connect_multiplayer_spawner() -> void:
+	multiplayer_spawner.spawn_path = PlayerManager
 	if not multiplayer_spawner.spawned.is_connected(_on_spawner_spawning):
 		multiplayer_spawner.spawned.connect(_on_spawner_spawning)
+		print("multiplayer spawner connected")
 
 func _on_main_request(function, arg) -> void:
 	match function:
@@ -85,6 +92,10 @@ func _on_host_created() -> void:
 	PlayerManager.spawn_player(multiplayer.get_unique_id(), curr_enviornment.get_spawn_point())
 	multiplayer.peer_connected.connect(PlayerManager.spawn_player.bind(curr_enviornment.get_spawn_point()))
 
+func _on_join_lobby() -> void:
+	switch_to_hub()
+
 func _on_spawner_spawning(node: Node) -> void:
+	print("im spawing huuuh ahuahh")
 	if node is ProtoController:
 		PlayerManager.initialize_player(node, curr_enviornment.get_spawn_point())
