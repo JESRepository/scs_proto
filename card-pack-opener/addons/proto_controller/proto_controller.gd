@@ -55,6 +55,8 @@ var freeflying : bool = false
 @onready var head: Node3D = $Head
 @onready var collider: CollisionShape3D = $Collider
 @onready var ray_cast_3d = $Head/Camera3D/RayCast3D
+@onready var menu_anchor = $Head/Menu_Anchor
+@onready var mesh = $Mesh
 
 func _ready() -> void:
 	check_input_mappings()
@@ -147,7 +149,7 @@ func rotate_look(rot_input : Vector2):
 	rotate_y(look_rotation.y)
 	head.transform.basis = Basis()
 	head.rotate_x(look_rotation.x)
-
+	
 
 func enable_freefly():
 	collider.disabled = true

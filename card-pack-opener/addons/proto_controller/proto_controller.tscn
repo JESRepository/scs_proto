@@ -9,6 +9,11 @@ albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
 radius = 0.4
 height = 1.8
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2uji"]
+albedo_color = Color(1, 0.57, 0.13999999, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wr06p"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iof21"]
 radius = 0.4
 height = 1.8
@@ -27,6 +32,12 @@ material_override = SubResource("StandardMaterial3D_iof21")
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_ucva2")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh" unique_id=1771834621]
+transform = Transform3D(-1.4424757e-08, -1.4424758e-08, 0.33, -0.33, 0, -1.4424758e-08, 0, -0.33, -1.4424758e-08, 0.0025999378, 0.349, -0.38609996)
+material_override = SubResource("StandardMaterial3D_g2uji")
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_wr06p")
+
 [node name="Collider" type="CollisionShape3D" parent="." unique_id=1806208145]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_iof21")
@@ -40,3 +51,6 @@ transform = Transform3D(1, 0, 0, 0, 0.9848077, -0.1736482, 0, 0.1736482, 0.98480
 [node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=764582060]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1433457, -3.57246)
 target_position = Vector3(0, 0, -4)
+
+[node name="Menu_Anchor" type="Node3D" parent="Head" unique_id=1939773481]
+transform = Transform3D(1, 0, 0, 0, 0.9099613, -0.41469324, 0, 0.41469324, 0.9099613, 0, 0.9012275, -5.0400686)
