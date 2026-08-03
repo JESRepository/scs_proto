@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dbxewlui20p0j"]
+
+[ext_resource type="Script" uid="uid://crg3j7g7jast6" path="res://scripts/menus/hub_menu.gd" id="1_8lk4i"]
+
+[node name="SpawnPackMenu" type="Control" unique_id=960052183]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_8lk4i")
+freezes_player = false
+
+[node name="SpawnPackButton" type="Button" parent="." unique_id=1096274472]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 32
+text = "spawn pack"
