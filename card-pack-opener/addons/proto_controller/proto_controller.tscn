@@ -13,7 +13,7 @@ height = 1.8
 radius = 0.4
 height = 1.8
 
-[node name="ProtoController" type="CharacterBody3D" unique_id=251483772]
+[node name="ProtoController" type="CharacterBody3D" unique_id=251483772 groups=["players"]]
 script = ExtResource("1_ucva2")
 input_left = "move_left"
 input_right = "move_right"

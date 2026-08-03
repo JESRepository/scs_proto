@@ -1,8 +1,11 @@
+class_name PackOpening
 extends Node3D
 
 
 @onready var card_anchor : Node3D = $CardAnchor
-@onready var pack_opening_menu : PackOpeningMenu = $PackOpeningMenu
+@onready var camera : Camera3D = $Camera3D
+
+signal show_open_button
 
 var pack_mesh_template = preload("uid://bc31isgi5my4t")
 var pack_mesh : PackMesh
@@ -18,16 +21,13 @@ func _ready() -> void:
 	create_pack_mesh()
 
 
-func _on_pack_opening_menu_open_pack_pressed() -> void:
+func open_pack() -> void:
 	var new_pack : Pack = load("uid://cixyyp5htaarn").duplicate()
 	new_pack.set_card_set(Sets.set_name.SET1)
 	new_pack.fill_pack()
 	new_pack.open_pack()
 	pack_opening_sequence()
 	packs.append(new_pack)
-
-func _on_pack_opening_menu_exit_pressed() -> void:
-	SceneLoader.load_scene("uid://ciwvjo5q0h5cj")
 
 func pack_opening_sequence() -> void:
 	pack_mesh.open_pack()
@@ -79,5 +79,8 @@ func _on_card_gone(index: int) -> void:
 		for card in card_meshes:
 			card.queue_free()
 		card_meshes.clear()
-		pack_opening_menu.show_open_pack_button()
+		show_open_button.emit()
 		create_pack_mesh()
+
+func set_camera() -> void:
+	camera.make_current()

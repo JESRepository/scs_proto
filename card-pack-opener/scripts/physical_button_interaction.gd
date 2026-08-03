@@ -1,7 +1,10 @@
 extends Node
 class_name PhysicalButtonInteraction
 
-@export var scene_path : String
+signal pressed(function, args)
+
+@export var selected_function : Menus.phys_button_func
+@export var args : Array
 
 func _on_press() -> void:
-	SceneLoader.load_scene(scene_path)
+	pressed.emit(selected_function, args)

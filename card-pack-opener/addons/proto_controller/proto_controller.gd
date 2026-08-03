@@ -2,7 +2,7 @@
 # CC0 License
 # Intended for rapid prototyping of first-person games.
 # Happy prototyping!
-
+class_name ProtoController
 extends CharacterBody3D
 
 ## Can we move around?
@@ -60,27 +60,37 @@ func _ready() -> void:
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
+	add_to_player_manager(self)
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Mouse capturing
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		capture_mouse()
-	if Input.is_key_pressed(KEY_ESCAPE):
-		release_mouse()
-	
-	# Look around
-	if mouse_captured and event is InputEventMouseMotion:
-		rotate_look(event.relative)
-	
-	# Toggle freefly mode
-	if can_freefly and Input.is_action_just_pressed(input_freefly):
-		if not freeflying:
-			enable_freefly()
-		else:
-			disable_freefly()
+	if Flags.freeze_player:
+		pass
+	else:
+		# Mouse capturing
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			capture_mouse()
+		if Input.is_key_pressed(KEY_ESCAPE):
+			release_mouse()
+		
+		# Look around
+		if mouse_captured and event is InputEventMouseMotion:
+			rotate_look(event.relative)
+		
+		# Toggle freefly mode
+		if can_freefly and Input.is_action_just_pressed(input_freefly):
+			if not freeflying:
+				enable_freefly()
+			else:
+				disable_freefly()
 
 func _physics_process(delta: float) -> void:
-	# If freeflying, handle freefly and nothing else
+	if Flags.freeze_player:
+		pass
+	else:
+		movement(delta)
+
+func movement(delta:float)-> void:
+		# If freeflying, handle freefly and nothing else
 	if can_freefly and freeflying:
 		var input_dir := Input.get_vector(input_left, input_right, input_forward, input_back)
 		var motion := (head.global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -181,3 +191,6 @@ func check_input_mappings():
 	if can_freefly and not InputMap.has_action(input_freefly):
 		push_error("Freefly disabled. No InputAction found for input_freefly: " + input_freefly)
 		can_freefly = false
+
+func add_to_player_manager(new_player: ProtoController) -> void:
+	PlayerManager.add_to_players(new_player)

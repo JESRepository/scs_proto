@@ -24,6 +24,9 @@ Cards="*uid://dg4wdmcnmberb"
 Flags="*uid://5nirtiktkxtj"
 CardSpawner="*uid://d11pjbvcee23n"
 JsonLoader="*uid://i7er61eaqd3h"
+Menus="*uid://ckvimb5w5o6mf"
+Environments="*uid://ijj63tt88sdm"
+PlayerManager="*uid://306sl2s62qjj"
 
 [editor]
 
@@ -33,6 +36,12 @@ movie_writer/fps=30
 
 import/blender/enabled.android=true
 import/blender/enabled.web=true
+
+[global_group]
+
+physical_buttons=""
+spatial_menu=""
+players=""
 
 [input]
 
