@@ -52,6 +52,4 @@ script = ExtResource("1_dd4yc")
 [node name="CardAnchor" type="Node3D" parent="PackOpening" unique_id=1732574923]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.41745916)
 
-[connection signal="exit_pressed" from="." to="PackOpening" method="_on_pack_opening_menu_exit_pressed"]
 [connection signal="pressed" from="BoxContainer/OpenPackButton" to="." method="_on_open_pack_button_pressed"]
-[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

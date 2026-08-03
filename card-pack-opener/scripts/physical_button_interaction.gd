@@ -3,7 +3,7 @@ class_name PhysicalButtonInteraction
 
 signal pressed(function, args)
 
-@export var selected_function : Menus.phys_button_func
+@export var selected_function : Menus.functions
 @export var args : Array
 
 func _on_press() -> void:
