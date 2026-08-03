@@ -47,6 +47,9 @@ var freeflying : bool = false
 @onready var mesh = $Mesh
 @onready var multiplayer_synchronizer = $MultiplayerSynchronizer
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
+
 func _ready() -> void:
 	check_input_mappings()
 	look_rotation.y = rotation.y
