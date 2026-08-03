@@ -65,7 +65,7 @@ func connect_menu_manager() -> void:
 		menu_manager.main_request.connect(_on_main_request)
 
 func connect_multiplayer_spawner() -> void:
-	multiplayer_spawner.spawn_path = PlayerManager
+	multiplayer_spawner.spawn_path = PlayerManager.get_path()
 	if not multiplayer_spawner.spawned.is_connected(_on_spawner_spawning):
 		multiplayer_spawner.spawned.connect(_on_spawner_spawning)
 		print("multiplayer spawner connected")
