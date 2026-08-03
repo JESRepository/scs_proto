@@ -46,12 +46,15 @@ var freeflying : bool = false
 @onready var menu_anchor = $Head/Menu_Anchor
 @onready var mesh = $Mesh
 @onready var multiplayer_synchronizer = $MultiplayerSynchronizer
+@onready var camera := $Head/Camera3D
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
 
 func _ready() -> void:
 	check_input_mappings()
+	if is_multiplayer_authority():
+		camera.make_current()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
 	add_to_player_manager(self)
