@@ -48,9 +48,9 @@ text = " X "
 script = ExtResource("1_dd4yc")
 
 [node name="Camera3D" type="Camera3D" parent="PackOpening" unique_id=1167918142]
-fov = 50.0
+fov = 80.0
 
 [node name="CardAnchor" type="Node3D" parent="PackOpening" unique_id=1732574923]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.52745914)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.28745914)
 
 [connection signal="pressed" from="BoxContainer/OpenPackButton" to="." method="_on_open_pack_button_pressed"]

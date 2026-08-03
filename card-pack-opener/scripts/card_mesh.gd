@@ -1,8 +1,9 @@
 class_name CardMesh
 extends MeshInstance3D
 
-@onready var static_body = $StaticBody3D
-@onready var animation_player = $AnimationPlayer
+@onready var static_body : StaticBody3D = $StaticBody3D
+@onready var collision_shape : CollisionShape3D = $StaticBody3D/CollisionShape3D
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 var pack_index : int = -1
 var rarity : Rarity.rarity = Rarity.rarity.NONE

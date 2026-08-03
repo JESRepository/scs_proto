@@ -40,12 +40,15 @@ func spawn_cards() -> void:
 	var z_offset : float = 0.0
 	var current_index : int = 0
 	for cards in curr_pack.pack_cards:
-		var new_card  = CardSpawner.spawn_card_mesh(curr_pack.pack_cards[current_index])
+		var new_card : CardMesh = CardSpawner.spawn_card_mesh(curr_pack.pack_cards[current_index])
 		card_anchor.add_child(new_card)
 		card_meshes.append(new_card)
 		
-		if not new_card.is_connected("card_gone", _on_card_gone):
-			new_card.connect("card_gone", _on_card_gone)
+		if not new_card.card_gone.is_connected(_on_card_gone):
+			new_card.card_gone.connect(_on_card_gone)
+		
+		if current_index != 0:
+			new_card.collision_shape.disabled = true
 		
 		new_card.pack_index = current_index
 		new_card.position.x += z_offset
@@ -66,7 +69,7 @@ func create_pack_mesh() -> void:
 	card_anchor.add_child(pack_mesh)
 
 func _on_card_gone(index: int) -> void:
-	var curr_card = card_meshes[index]
+	var curr_card : CardMesh = card_meshes[index]
 	if index != packs.back().pack_cards.size() - 1:
 		var move_index = index
 		for n in range(index, card_meshes.size()-1):
@@ -75,6 +78,7 @@ func _on_card_gone(index: int) -> void:
 			var tween = get_tree().create_tween()
 			tween.tween_property(next_card, "position", target.position, 0.1)
 			move_index += 1
+		card_meshes[index+1].collision_shape.disabled = false
 	else:
 		for card in card_meshes:
 			card.queue_free()
