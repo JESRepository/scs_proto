@@ -1,13 +1,16 @@
 extends Node
 
-@onready var player_scene = preload("uid://bs72ogkvdd7d6")
-@onready var menu_manager : MenuManager = $MenuManager
+@onready var menu_manager := $MenuManager
+@onready var multiplayer_spawner := $MultiplayerSpawner
 
 var curr_scene : Node
+var curr_enviornment: CustomEnvironment
 var player : ProtoController
 
 func _ready() -> void:
 	curr_scene = Menus.get_scene(Menus.menu_name.MAIN).instantiate()
+	connect_network()
+	connect_multiplayer_spawner()
 	add_child(curr_scene)
 	connect_menu(curr_scene)
 	connect_menu_manager()
@@ -21,21 +24,22 @@ func _on_proto_controller_player_interaction(collider) -> void:
 
 func connect_menu(menu: Node) -> void:
 	if menu is MainMenu:
-			if not menu.is_connected("start_pressed", _on_main_menu_start_pressed):
-				menu.connect("start_pressed", _on_main_menu_start_pressed)
+			if not menu.host_pressed.is_connected(_on_host_pressed):
+				menu.host_pressed.connect(_on_host_pressed)
 
 func connect_envi(envi: CustomEnvironment) -> void:
 	if not envi.button_request.is_connected(_on_main_request):
 		envi.button_request.connect(_on_main_request)
+	curr_enviornment = envi
 	match envi:
 		Hub:
 			pass
 
-func _on_main_menu_start_pressed() -> void:
+func _on_host_pressed() -> void:
 	var new_scene = Environments.get_envi(Environments.envi_name.HUB).instantiate()
 	switch_scene(new_scene)
-	spawn_player()
 	menu_manager.add_submenu(Menus.menu_name.SPAWN_PACK)
+	Networking.host_lobby()
 
 func switch_scene(new_scene: Node) -> void:
 	if new_scene is CustomEnvironment:
@@ -44,10 +48,8 @@ func switch_scene(new_scene: Node) -> void:
 	curr_scene.queue_free()
 	curr_scene = new_scene
 
-func spawn_player() -> void:
-	player = player_scene.instantiate()
-	add_child(player)
-	connect_player()
+func connect_network() -> void:
+	Networking.host_created.connect(_on_host_created)
 
 func connect_player() -> void:
 	if not player.player_interaction.is_connected(_on_proto_controller_player_interaction):
@@ -56,6 +58,10 @@ func connect_player() -> void:
 func connect_menu_manager() -> void:
 	if not menu_manager.main_request.is_connected(_on_main_request):
 		menu_manager.main_request.connect(_on_main_request)
+
+func connect_multiplayer_spawner() -> void:
+	if not multiplayer_spawner.spawned.is_connected(_on_spawner_spawning):
+		multiplayer_spawner.spawned.connect(_on_spawner_spawning)
 
 func _on_main_request(function, arg) -> void:
 	match function:
@@ -74,3 +80,11 @@ func _on_main_request(function, arg) -> void:
 			menu_manager.clear_newest_submenu()
 		Menus.functions.SHOW_SUBMENUS:
 			menu_manager.show_submenus()
+
+func _on_host_created() -> void:
+	PlayerManager.spawn_player(multiplayer.get_unique_id(), curr_enviornment.get_spawn_point())
+	multiplayer.peer_connected.connect(PlayerManager.spawn_player)
+
+func _on_spawner_spawning(node: Node) -> void:
+	if node is ProtoController:
+		PlayerManager.initialize_player(node, curr_enviornment.get_spawn_point())

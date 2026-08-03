@@ -1,13 +1,13 @@
 class_name MainMenu
 extends Control
 
-signal start_pressed
+signal host_pressed
 
-@onready var start_button = $VBoxContainer/StartButton
+@onready var host_button = $VBoxContainer/HostButton
 
 func _ready() -> void:
-	if not start_button.is_connected("pressed", _on_start_pressed):
-		start_button.connect("pressed",_on_start_pressed)
+	if not host_button.is_connected("pressed", _on_host_pressed):
+		host_button.connect("pressed",_on_host_pressed)
 
-func _on_start_pressed() -> void:
-	start_pressed.emit()
+func _on_host_pressed() -> void:
+	host_pressed.emit()

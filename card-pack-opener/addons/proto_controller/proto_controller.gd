@@ -17,31 +17,19 @@ extends CharacterBody3D
 @export var can_freefly : bool = false
 
 @export_group("Speeds")
-## Look around rotation speed.
 @export var look_speed : float = 0.002
-## Normal speed.
 @export var base_speed : float = 7.0
-## Speed of jump.
 @export var jump_velocity : float = 4.5
-## How fast do we run?
 @export var sprint_speed : float = 10.0
-## How fast do we freefly?
 @export var freefly_speed : float = 25.0
 
 @export_group("Input Actions")
-## Name of Input Action to move Left.
 @export var input_left : String = "ui_left"
-## Name of Input Action to move Right.
 @export var input_right : String = "ui_right"
-## Name of Input Action to move Forward.
 @export var input_forward : String = "ui_up"
-## Name of Input Action to move Backward.
 @export var input_back : String = "ui_down"
-## Name of Input Action to Jump.
 @export var input_jump : String = "ui_accept"
-## Name of Input Action to Sprint.
 @export var input_sprint : String = "sprint"
-## Name of Input Action to toggle freefly mode.
 @export var input_freefly : String = "freefly"
 
 signal player_interaction
@@ -57,6 +45,7 @@ var freeflying : bool = false
 @onready var ray_cast_3d = $Head/Camera3D/RayCast3D
 @onready var menu_anchor = $Head/Menu_Anchor
 @onready var mesh = $Mesh
+@onready var multiplayer_synchronizer = $MultiplayerSynchronizer
 
 func _ready() -> void:
 	check_input_mappings()
@@ -65,7 +54,7 @@ func _ready() -> void:
 	add_to_player_manager(self)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Flags.freeze_player:
+	if Flags.freeze_player or not is_multiplayer_authority():
 		pass
 	else:
 		# Mouse capturing
@@ -86,7 +75,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				disable_freefly()
 
 func _physics_process(delta: float) -> void:
-	if Flags.freeze_player:
+	if Flags.freeze_player or not is_multiplayer_authority():
 		pass
 	else:
 		movement(delta)

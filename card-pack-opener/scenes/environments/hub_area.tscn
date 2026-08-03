@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c1q0jfj1hxfwl" path="res://scripts/environments/hub_area.gd" id="1_sae67"]
 [ext_resource type="PackedScene" uid="uid://xrravjc2v1sf" path="res://scenes/button_manager.tscn" id="2_3af0h"]
 [ext_resource type="PackedScene" uid="uid://chqqsspk6xh17" path="res://scenes/physical_button_interaction.tscn" id="2_sae67"]
+[ext_resource type="PackedScene" uid="uid://bch2co0iarg0k" path="res://scenes/environments/spawn_point.tscn" id="5_73iha"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -45,7 +46,7 @@ operation = 2
 environment = SubResource("Environment_0wfyh")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Render" unique_id=2136326458]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 9.44, 0)
 shadow_enabled = true
 
 [node name="PhysicalButton" parent="." unique_id=939827809 instance=ExtResource("1_3fu1u")]
@@ -53,3 +54,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4499998, 1.8199999, 3.34)
 
 [node name="PhysicalButtonInteraction" parent="PhysicalButton" unique_id=196487795 instance=ExtResource("2_sae67")]
 args = ["PACK_OPEN"]
+
+[node name="SpawnPoint" parent="." unique_id=66213810 instance=ExtResource("5_73iha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.97)

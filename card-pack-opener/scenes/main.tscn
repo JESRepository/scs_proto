@@ -8,3 +8,7 @@ script = ExtResource("1_0wfyh")
 
 [node name="MenuManager" type="Node" parent="." unique_id=239131854]
 script = ExtResource("2_0wfyh")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=550771566]
+_spawnable_scenes = PackedStringArray("uid://bs72ogkvdd7d6")
+spawn_path = NodePath("..")

@@ -18,6 +18,14 @@ albedo_color = Color(1, 0.57, 0.13999999, 1)
 radius = 0.4
 height = 1.8
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_g2uji"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="ProtoController" type="CharacterBody3D" unique_id=251483772 groups=["players"]]
 script = ExtResource("1_ucva2")
 input_left = "move_left"
@@ -55,3 +63,6 @@ target_position = Vector3(0, 0, -4)
 
 [node name="Menu_Anchor" type="Node3D" parent="Head" unique_id=1939773481]
 transform = Transform3D(1, 0, 0, 0, 0.9099613, -0.41469324, 0, 0.41469324, 0.9099613, 0, 0.9012275, -5.0400686)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1402735959]
+replication_config = SubResource("SceneReplicationConfig_g2uji")
