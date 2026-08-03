@@ -83,7 +83,7 @@ func _on_main_request(function, arg) -> void:
 
 func _on_host_created() -> void:
 	PlayerManager.spawn_player(multiplayer.get_unique_id(), curr_enviornment.get_spawn_point())
-	multiplayer.peer_connected.connect(PlayerManager.spawn_player)
+	multiplayer.peer_connected.connect(PlayerManager.spawn_player.bind(curr_enviornment.get_spawn_point()))
 
 func _on_spawner_spawning(node: Node) -> void:
 	if node is ProtoController:
