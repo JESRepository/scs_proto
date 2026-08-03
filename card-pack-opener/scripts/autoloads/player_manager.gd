@@ -33,6 +33,7 @@ func add_to_players(new_player) -> void:
 		pass
 	else:
 		players.append(new_player)
+		print(new_player)
 
 func capture_mouse() -> void:
 	if players.is_empty():
