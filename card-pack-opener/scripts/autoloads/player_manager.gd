@@ -4,6 +4,9 @@ extends Node
 
 var players : Array[ProtoController] = []
 
+func _ready() -> void:
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+
 func spawn_player(peer_id: int, spawn_point: Vector3) -> void:
 	var new_player := player_scene.instantiate() as ProtoController
 	new_player.name = str(peer_id)
@@ -29,11 +32,10 @@ func get_menu_anchor_pos() -> Vector3:
 	return players[0].menu_anchor.global_position
 
 func add_to_players(new_player) -> void:
-	if players.has(new_player) == null:
+	if players.has(new_player):
 		pass
 	else:
 		players.append(new_player)
-		print(new_player)
 
 func capture_mouse() -> void:
 	if players.is_empty():
@@ -43,3 +45,12 @@ func capture_mouse() -> void:
 
 func get_rotation() -> Vector3:
 	return players[0].rotation
+
+
+func _on_peer_disconnected(peer_id: int) -> void:
+	var disconnected_player = get_node_or_null(str(peer_id))
+	if disconnected_player == null:
+		print("error: player " + str(peer_id) + " does not exist")
+	else:
+		players.remove_at(players.find(disconnected_player))
+		disconnected_player.queue_free()

@@ -35,7 +35,6 @@ func set_freeze_flag() -> void:
 		var curr_menu : Submenu = n
 		if curr_menu.freezes_player:
 			new_freeze_value = true
-			print("froze player")
 			break
 	Flags.player_in_frozen_submenu = new_freeze_value
 	Flags.freeze_player = new_freeze_value

@@ -4,9 +4,11 @@ extends Submenu
 @onready var open_pack_button : Button = $BoxContainer/OpenPackButton
 @onready var pack_opening : PackOpening = $PackOpening
 @onready var exit_button : Button = $ExitButton
+@onready var multiplayer_spawner := $MultiplayerSpawner
 
 func _ready() -> void:
 	connect_pack_opening()
+	connect_multiplayer_spawner()
 	pack_opening.set_camera()
 
 func _on_open_pack_button_pressed() -> void:
@@ -23,5 +25,13 @@ func connect_pack_opening() -> void:
 	if not exit_button.pressed.is_connected(_on_exit_button_pressed):
 		exit_button.pressed.connect(_on_exit_button_pressed)
 
+func connect_multiplayer_spawner() -> void:
+	if not multiplayer_spawner.spawned.is_connected(_on_spawned):
+		multiplayer_spawner.spawned.connect(_on_spawned)
+
 func _on_show_open_button() -> void:
 	open_pack_button.visible = true
+
+
+func _on_spawned(node: Node) -> void:
+	print("spawned " + str(node))

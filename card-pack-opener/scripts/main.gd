@@ -43,7 +43,6 @@ func switch_to_hub() -> void:
 	var new_scene = Environments.get_envi(Environments.envi_name.HUB).instantiate()
 	switch_scene(new_scene)
 	menu_manager.add_submenu(Menus.menu_name.SPAWN_PACK)
-	print("we in the hub")
 
 func switch_scene(new_scene: Node) -> void:
 	if new_scene is CustomEnvironment:
@@ -68,12 +67,10 @@ func connect_multiplayer_spawner() -> void:
 	multiplayer_spawner.spawn_path = PlayerManager.get_path()
 	if not multiplayer_spawner.spawned.is_connected(_on_spawner_spawning):
 		multiplayer_spawner.spawned.connect(_on_spawner_spawning)
-		print("multiplayer spawner connected")
 
 func _on_main_request(function, arg) -> void:
 	match function:
 		Menus.functions.LOAD_SUBMENU:
-			print(Menus.menu_name)
 			var target_menu = Menus.menu_name.get(arg[0])
 			if target_menu == null:
 				push_error("error: menu not found")
@@ -96,6 +93,5 @@ func _on_join_lobby() -> void:
 	switch_to_hub()
 
 func _on_spawner_spawning(node: Node) -> void:
-	print("im spawing huuuh ahuahh")
 	if node is ProtoController:
 		PlayerManager.initialize_player(node, curr_enviornment.get_spawn_point())

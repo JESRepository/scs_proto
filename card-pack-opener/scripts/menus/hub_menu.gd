@@ -10,6 +10,5 @@ func _ready() -> void:
 		spawn_pack_button.pressed.connect(_on_spawn_pack_pressed)
 
 func _on_spawn_pack_pressed() -> void:
-	print("clicked")
 	main_request.emit(Menus.functions.HIDE_SUBMENUS, [])
 	main_request.emit(Menus.functions.LOAD_SUBMENU, ["PACK_OPEN"])

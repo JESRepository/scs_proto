@@ -41,7 +41,7 @@ func spawn_cards() -> void:
 	var current_index : int = 0
 	for cards in curr_pack.pack_cards:
 		var new_card : CardMesh = CardSpawner.spawn_card_mesh(curr_pack.pack_cards[current_index])
-		card_anchor.add_child(new_card)
+		card_anchor.add_child(new_card, true)
 		card_meshes.append(new_card)
 		
 		if not new_card.card_gone.is_connected(_on_card_gone):
