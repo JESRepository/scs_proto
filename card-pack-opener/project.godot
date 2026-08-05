@@ -22,12 +22,12 @@ Sets="*uid://7bjknupqlj6r"
 Rarity="*uid://cyh0enkmikleh"
 Cards="*uid://dg4wdmcnmberb"
 Flags="*uid://5nirtiktkxtj"
-CardSpawner="*uid://d11pjbvcee23n"
 JsonLoader="*uid://i7er61eaqd3h"
 Menus="*uid://ckvimb5w5o6mf"
 Environments="*uid://ijj63tt88sdm"
 PlayerManager="*uid://306sl2s62qjj"
 Networking="*uid://c3enho87xgq4j"
+ObjectManager="*uid://b3tf42hsgskge"
 
 [editor]
 

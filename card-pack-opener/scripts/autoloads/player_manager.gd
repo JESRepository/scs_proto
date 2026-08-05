@@ -2,7 +2,7 @@ extends Node
 
 @onready var player_scene = preload("uid://bs72ogkvdd7d6")
 
-var players : Array[ProtoController] = []
+var players : Dictionary[String, ProtoController] = {}
 
 func _ready() -> void:
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
@@ -16,41 +16,40 @@ func spawn_player(peer_id: int, spawn_point: Vector3) -> void:
 func initialize_player(player: ProtoController, spawn_point: Vector3) -> void:
 	player.position = spawn_point
 	for other in players:
-		player.add_collision_exception_with(other)
-	players.append(player)
+		player.add_collision_exception_with(players[other])
+	players.set(player.name, player)
 
-func get_player_global_position() -> Vector3:
-	var new_position : Vector3
-	if players.is_empty():
-		push_error("error: no players in PlayerManager")
-		return new_position
-	else:
-		new_position = players[0].global_position
-		return new_position
+func get_position(peer_id: int) -> Vector3:
+	return players[str(peer_id)].global_position
 
-func get_menu_anchor_pos() -> Vector3:
-	return players[0].menu_anchor.global_position
+func get_menu_anchor_pos(peer_id: int) -> Vector3:
+	return players[str(peer_id)].menu_anchor.global_position
 
 func add_to_players(new_player) -> void:
-	if players.has(new_player):
+	if players.has(new_player.name):
 		pass
 	else:
-		players.append(new_player)
+		players.set(new_player.name ,new_player)
 
-func capture_mouse() -> void:
+func capture_mouse(peer_id: int) -> void:
 	if players.is_empty():
 		pass
 	else:
-		players[0].capture_mouse()
+		players[str(peer_id)].capture_mouse()
 
-func get_rotation() -> Vector3:
-	return players[0].rotation
+func get_rotation(peer_id: int) -> Vector3:
+	return players[str(peer_id)].global_rotation
 
+func get_quaternion(peer_id: int) -> Quaternion:
+	return players[str(peer_id)].quaternion
+
+func get_player(peer_id: int) -> ProtoController:
+	return players[str(peer_id)]
 
 func _on_peer_disconnected(peer_id: int) -> void:
 	var disconnected_player = get_node_or_null(str(peer_id))
 	if disconnected_player == null:
 		print("error: player " + str(peer_id) + " does not exist")
 	else:
-		players.remove_at(players.find(disconnected_player))
+		players.erase(disconnected_player)
 		disconnected_player.queue_free()

@@ -11,4 +11,5 @@ var freeze_player : bool:
 		else:
 			freeze_player = true
 		if freeze_player == false:
-			PlayerManager.capture_mouse()
+			PlayerManager.capture_mouse(multiplayer.get_unique_id())
+			multiplayer

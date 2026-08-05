@@ -53,8 +53,4 @@ fov = 80.0
 [node name="CardAnchor" type="Node3D" parent="PackOpening" unique_id=1732574923]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.28745914)
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=605245970]
-_spawnable_scenes = PackedStringArray("uid://bc31isgi5my4t", "uid://d4gyuufxkvyef")
-spawn_path = NodePath("../PackOpening/CardAnchor")
-
 [connection signal="pressed" from="BoxContainer/OpenPackButton" to="." method="_on_open_pack_button_pressed"]

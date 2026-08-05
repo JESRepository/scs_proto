@@ -61,8 +61,8 @@ fov = 50.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99334574, -6.40246)
 target_position = Vector3(0, 0, -4)
 
-[node name="Menu_Anchor" type="Node3D" parent="Head" unique_id=1939773481]
-transform = Transform3D(1, 0, 0, 0, 0.9099613, -0.41469324, 0, 0.41469324, 0.9099613, 0, 0.9012275, -5.0400686)
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1402735959]
 replication_config = SubResource("SceneReplicationConfig_g2uji")
+
+[node name="Menu_Anchor" type="Node3D" parent="." unique_id=1939773481]
+transform = Transform3D(1, 0, 0, 0, 0.9099613, -0.41469324, 0, 0.41469324, 0.9099613, 0, 2.0873604, -5.0922318)

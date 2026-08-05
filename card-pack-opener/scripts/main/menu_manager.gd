@@ -7,11 +7,13 @@ var curr_submenus : Array[Control] = []
 
 func add_submenu(new_menu_name: Menus.menu_name) -> void:
 	var new_menu : Submenu = Menus.menus.get(new_menu_name).instantiate()
-	connect_submenu(new_menu)
 	add_child(new_menu)
 	if new_menu.is_in_group("spatial_menu"):
+		print("moving menu")
 		new_menu.spatial_anchor.global_position = get_spatial_menu_pos()
-		new_menu.spatial_anchor.rotation.y = PlayerManager.get_rotation().y
+		new_menu.spatial_anchor.rotation.y = PlayerManager.get_rotation(multiplayer.get_unique_id()).y
+		new_menu.initialize_spatial_menu()
+	connect_submenu(new_menu)
 	curr_submenus.append(new_menu)
 	set_freeze_flag()
 
@@ -19,14 +21,13 @@ func connect_submenu(curr_submenu: Submenu) -> void:
 	if not curr_submenu.main_request.is_connected(_on_main_request):
 			curr_submenu.main_request.connect(_on_main_request)
 
-
 func clear_newest_submenu() -> void:
 	var newest_submenu = curr_submenus.pop_back()
 	newest_submenu.queue_free()
 	set_freeze_flag()
 
 func get_spatial_menu_pos() -> Vector3:
-	var new_coords = PlayerManager.get_menu_anchor_pos()
+	var new_coords = PlayerManager.get_menu_anchor_pos(multiplayer.get_unique_id())
 	return new_coords
 
 func set_freeze_flag() -> void:
@@ -54,7 +55,6 @@ func show_submenus() -> void:
 		var curr_menu : Submenu = n
 		curr_menu.set_process(true)
 		curr_menu.visible = true
-	var last_submenu : Submenu = curr_submenus.back()
 
 func _on_main_request(function, args) -> void:
 	main_request.emit(function, args)

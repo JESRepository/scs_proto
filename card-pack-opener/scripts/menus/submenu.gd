@@ -5,3 +5,6 @@ extends Control
 @export var freezes_player: bool = true
 
 signal main_request(function: Menus.functions, args: Array)
+
+func initialize_spatial_menu() -> void:
+	pass

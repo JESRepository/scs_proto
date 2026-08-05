@@ -45,5 +45,6 @@ func _create_card(card_rarity):
 	return new_card
 
 func open_pack() -> void:
-	for n in pack_cards:
-		print(n.card_name)
+	#for n in pack_cards:
+		#print(n.card_name)
+	pass
