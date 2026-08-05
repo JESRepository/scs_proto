@@ -10,6 +10,7 @@ func _ready() -> void:
 	pack_opening.set_camera()
 
 func initialize_spatial_menu() -> void:
+	pack_opening.initialize_anchor()
 	pack_opening.create_pack_mesh()
 
 func _on_open_pack_button_pressed() -> void:
@@ -17,9 +18,10 @@ func _on_open_pack_button_pressed() -> void:
 	pack_opening.open_pack()
 
 func _on_exit_button_pressed() -> void:
-	pack_opening.remove_all_models()
+	pack_opening.remove_all_nodes()
 	main_request.emit(Menus.functions.SHOW_SUBMENUS, [])
 	main_request.emit(Menus.functions.CLEAR_NEWEST_SUBMENU, [])
+	PlayerManager.set_camera(multiplayer.get_unique_id())
 
 func connect_pack_opening() -> void:
 	if not pack_opening.show_open_button.is_connected(_on_show_open_button):

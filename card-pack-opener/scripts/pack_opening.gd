@@ -1,8 +1,9 @@
 class_name PackOpening
 extends Node3D
 
-@onready var card_anchor : Node3D = $CardAnchor
+@onready var card_anchor : Node3D = $Marker3D
 @onready var camera : Camera3D = $Camera3D
+@onready var anchor : CardAnchor
 
 signal show_open_button
 
@@ -13,11 +14,15 @@ var card_mesh_template = preload("uid://d4gyuufxkvyef")
 var packs : Array[Pack]
 var card_meshes : Array[CardMesh]
 
+
 const CARD_SPAWN_TIMER: float = 0.1
 const CARD_SPAWN_SPACING: float = 0.02
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func initialize_anchor() -> void:
+	create_anchor()
 
 func open_pack() -> void:
 	var new_pack : Pack = load("uid://cixyyp5htaarn").duplicate()
@@ -37,7 +42,6 @@ func _on_pack_mesh_pack_opened() -> void:
 func spawn_cards() -> void:
 	var curr_pack = packs.back()
 	var current_index : int = 0
-	var anchor = create_anchor()
 	var offset = Vector3(0,0,0)
 	var offset_vector = Vector3(CARD_SPAWN_SPACING, 0, CARD_SPAWN_SPACING * -1)
 	for cards in curr_pack.pack_cards:
@@ -59,7 +63,7 @@ func spawn_cards() -> void:
 		current_index += 1
 
 func create_anchor() -> Node3D:
-	var anchor = card_anchor.duplicate()
+	anchor = CardAnchor.new()
 	ObjectManager.add_object(anchor)
 	anchor.global_position = card_anchor.global_position
 	anchor.quaternion = PlayerManager.get_quaternion(multiplayer.get_unique_id())
@@ -79,8 +83,8 @@ func initialize_card(card_mesh: CardMesh) -> void:
 	card_mesh.rotation.x = PI/2
 
 func initialize_pack(new_pack_mesh: PackMesh) -> void:
-	new_pack_mesh.global_position = card_anchor.global_position
-	new_pack_mesh.global_rotation = card_anchor.global_rotation
+	new_pack_mesh.global_position = anchor.global_position
+	new_pack_mesh.global_rotation = anchor.global_rotation
 
 func _on_card_gone(index: int) -> void:
 	if index != packs.back().pack_cards.size() - 1:
@@ -102,10 +106,13 @@ func _on_card_gone(index: int) -> void:
 func set_camera() -> void:
 	camera.make_current()
 
-func remove_all_models() -> void:
+func remove_all_nodes() -> void:
 	for n in card_meshes:
 		ObjectManager.remove_object(n)
 	card_meshes.clear()
 	if pack_mesh != null:
 		ObjectManager.remove_object(pack_mesh)
 		pack_mesh = null
+	if anchor != null:
+		ObjectManager.remove_object(anchor)
+		anchor = null

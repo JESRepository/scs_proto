@@ -9,7 +9,6 @@ func add_submenu(new_menu_name: Menus.menu_name) -> void:
 	var new_menu : Submenu = Menus.menus.get(new_menu_name).instantiate()
 	add_child(new_menu)
 	if new_menu.is_in_group("spatial_menu"):
-		print("moving menu")
 		new_menu.spatial_anchor.global_position = get_spatial_menu_pos()
 		new_menu.spatial_anchor.rotation.y = PlayerManager.get_rotation(multiplayer.get_unique_id()).y
 		new_menu.initialize_spatial_menu()

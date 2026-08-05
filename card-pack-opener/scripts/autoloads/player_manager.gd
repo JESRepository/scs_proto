@@ -51,5 +51,9 @@ func _on_peer_disconnected(peer_id: int) -> void:
 	if disconnected_player == null:
 		print("error: player " + str(peer_id) + " does not exist")
 	else:
-		players.erase(disconnected_player)
+		players.erase(disconnected_player.name)
 		disconnected_player.queue_free()
+
+func set_camera(peer_id: int) -> void:
+	var player_camera := players[str(peer_id)].camera
+	player_camera.make_current()

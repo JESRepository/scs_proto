@@ -107,6 +107,20 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_w8i45"]
 size = Vector3(0.25, 0.35, 0.001)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w8i45"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("StaticBody3D/CollisionShape3D:disabled")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+
 [node name="CardMesh" type="MeshInstance3D" unique_id=1990464157]
 mesh = ExtResource("1_w8i45")
 script = ExtResource("1_8uaap")
@@ -120,6 +134,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2123185473]
 shape = SubResource("BoxShape3D_w8i45")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=164884909]
+replication_config = SubResource("SceneReplicationConfig_w8i45")
 
 [connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]
 [connection signal="mouse_entered" from="StaticBody3D" to="." method="_on_static_body_3d_mouse_entered"]

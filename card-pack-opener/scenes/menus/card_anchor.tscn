@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b03pknchr3as8"]
+
+[ext_resource type="Script" uid="uid://drqwswlnle4q6" path="res://scripts/menus/card_anchor.gd" id="1_2rkga"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_03au0"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
+[node name="CardAnchor" type="Node3D" unique_id=1307636298]
+script = ExtResource("1_2rkga")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=598599512]
+replication_config = SubResource("SceneReplicationConfig_03au0")

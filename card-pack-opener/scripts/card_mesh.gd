@@ -14,6 +14,7 @@ func _ready() -> void:
 	static_body.process_mode = Node.PROCESS_MODE_DISABLED
 	await get_tree().create_timer(0.5).timeout
 	static_body.process_mode = Node.PROCESS_MODE_ALWAYS
+	set_multiplayer_authority(multiplayer.get_unique_id())
 
 func _on_static_body_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event.is_action("interact") and event.is_released() and Flags._are_pack_cards_moving == false:

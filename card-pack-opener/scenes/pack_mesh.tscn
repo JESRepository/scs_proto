@@ -40,6 +40,17 @@ _data = {
 &"pack_open": SubResource("Animation_lv5dx")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1m7jr"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
 [node name="PackMesh" type="MeshInstance3D" unique_id=1711318541]
 mesh = ExtResource("1_1m7jr")
 script = ExtResource("1_r3j8k")
@@ -48,3 +59,6 @@ script = ExtResource("1_r3j8k")
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_1m7jr")
 autoplay = &"RESET"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1915413012]
+replication_config = SubResource("SceneReplicationConfig_1m7jr")
