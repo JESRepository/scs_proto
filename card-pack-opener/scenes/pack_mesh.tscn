@@ -60,5 +60,5 @@ root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_1m7jr")
 autoplay = &"RESET"
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1915413012]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1334236008]
 replication_config = SubResource("SceneReplicationConfig_1m7jr")

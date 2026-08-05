@@ -15,6 +15,7 @@ func initialize_spatial_menu() -> void:
 
 func _on_open_pack_button_pressed() -> void:
 	open_pack_button.visible = false
+	Networking.rpc_message.rpc_id(1, multiplayer.get_unique_id() ,"requesting pack open")
 	pack_opening.open_pack()
 
 func _on_exit_button_pressed() -> void:

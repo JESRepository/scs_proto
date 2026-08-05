@@ -12,4 +12,3 @@ var freeze_player : bool:
 			freeze_player = true
 		if freeze_player == false:
 			PlayerManager.capture_mouse(multiplayer.get_unique_id())
-			multiplayer

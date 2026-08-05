@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ceyrnacchft0d"]
+
+[ext_resource type="Script" uid="uid://b3tf42hsgskge" path="res://scripts/autoloads/object_manager.gd" id="1_sag6j"]
+[ext_resource type="Script" uid="uid://8u73wnlseiut" path="res://scenes/autoloads/card_manager.gd" id="2_5ofww"]
+
+[node name="ObjectManager" type="Node" unique_id=1314507779]
+script = ExtResource("1_sag6j")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=23975101]
+_spawnable_scenes = PackedStringArray("uid://d4gyuufxkvyef", "uid://bc31isgi5my4t", "uid://b03pknchr3as8")
+spawn_path = NodePath("..")
+
+[node name="CardManager" type="Node" parent="." unique_id=143919823]
+script = ExtResource("2_5ofww")
